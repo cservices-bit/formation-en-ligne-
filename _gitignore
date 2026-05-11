@@ -1,0 +1,65 @@
+# ========== SYSTÈMES D'EXPLOITATION ==========
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ========== ÉDITEURS & IDE ==========
+.vscode/
+.idea/
+*.sublime-*
+.project
+.classpath
+.settings/
+*.code-workspace
+
+# ========== JEKYLL ==========
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile
+Gemfile.lock
+vendor/
+.bundle/
+
+# ========== TEMPORAIRES ==========
+*.tmp
+*.temp
+*.log
+*.cache
+*.bak
+*.backup
+*.old
+
+# ========== ENVIRONNEMENT & SÉCURITÉ ==========
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# ========== DÉPENDANCES (si jamais tu ajoutes npm plus tard) ==========
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ========== FICHIERS UTILISATEUR ==========
+*.user
+*.userosscache
+*.sln.docstates
+
+# ========== MÉDIAS (optionnel - décommente si besoin) ==========
+# assets/images/originals/
+# *.psd
+# *.ai
+# *.sketch
