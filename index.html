@@ -1,264 +1,697 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plateforme de formation en ligne - Développez vos compétences avec nos cours experts">
-    <title>C Service Business | Formation en ligne</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="assets/images/logo/logo.png" type="image/png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>C-SERVICE FORMATION — ULTRA BUSINESS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#00e5ff;
+border-radius:20px;
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.3);
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+font-size:26px;
+font-weight:800;
+color:#00e5ff;
+}
+
+.logo span{
+color:#fff;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:0.4s;
+}
+
+nav ul li a:hover{
+color:#00e5ff;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:120px 8%;
+background:
+linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
+url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920');
+background-size:cover;
+background-position:center;
+}
+
+.hero-content{
+max-width:900px;
+}
+
+.badge{
+display:inline-block;
+padding:10px 18px;
+border-radius:50px;
+background:rgba(0,229,255,0.1);
+border:1px solid rgba(0,229,255,0.3);
+margin-bottom:25px;
+color:#00e5ff;
+font-size:14px;
+}
+
+.hero h1{
+font-size:70px;
+line-height:1.1;
+margin-bottom:20px;
+font-weight:800;
+}
+
+.hero h1 span{
+color:#00e5ff;
+}
+
+.hero p{
+font-size:20px;
+line-height:1.8;
+color:#cfd8dc;
+margin-bottom:40px;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:17px 35px;
+border:none;
+border-radius:50px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.4s;
+text-decoration:none;
+display:inline-block;
+}
+
+.btn-primary{
+background:#00e5ff;
+color:#000;
+box-shadow:0 0 25px rgba(0,229,255,0.5);
+}
+
+.btn-primary:hover{
+transform:translateY(-5px);
+}
+
+.btn-outline{
+border:1px solid rgba(255,255,255,0.2);
+color:white;
+background:transparent;
+}
+
+.btn-outline:hover{
+background:white;
+color:black;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:80px 8%;
+}
+
+.stat-box{
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.06);
+padding:35px;
+border-radius:25px;
+text-align:center;
+backdrop-filter:blur(10px);
+transition:0.4s;
+}
+
+.stat-box:hover{
+transform:translateY(-10px);
+border-color:#00e5ff;
+}
+
+.stat-box h2{
+font-size:45px;
+color:#00e5ff;
+margin-bottom:10px;
+}
+
+.stat-box p{
+color:#cfd8dc;
+}
+
+/* SECTION */
+
+section{
+padding:100px 8%;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.section-title h2{
+font-size:50px;
+margin-bottom:15px;
+}
+
+.section-title p{
+color:#b0bec5;
+max-width:700px;
+margin:auto;
+line-height:1.8;
+}
+
+/* COURSES */
+
+.courses{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.course-card{
+background:rgba(255,255,255,0.03);
+border-radius:25px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.06);
+transition:0.4s;
+}
+
+.course-card:hover{
+transform:translateY(-10px);
+border-color:#00e5ff;
+}
+
+.course-card img{
+width:100%;
+height:230px;
+object-fit:cover;
+}
+
+.course-content{
+padding:30px;
+}
+
+.course-content h3{
+font-size:25px;
+margin-bottom:15px;
+}
+
+.course-content p{
+color:#cfd8dc;
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.price{
+font-size:28px;
+font-weight:700;
+color:#00e5ff;
+margin-bottom:20px;
+}
+
+/* FEATURES */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.feature-box{
+padding:35px;
+border-radius:25px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.06);
+transition:0.4s;
+}
+
+.feature-box:hover{
+transform:translateY(-10px);
+border-color:#00e5ff;
+}
+
+.feature-box h3{
+margin-bottom:15px;
+font-size:24px;
+}
+
+.feature-box p{
+line-height:1.8;
+color:#cfd8dc;
+}
+
+/* TESTIMONIALS */
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.testimonial{
+background:rgba(255,255,255,0.03);
+padding:35px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.testimonial p{
+line-height:1.9;
+color:#cfd8dc;
+margin-bottom:20px;
+}
+
+.testimonial h4{
+color:#00e5ff;
+}
+
+/* CONTACT */
+
+.contact-box{
+background:linear-gradient(135deg,#00e5ff,#0066ff);
+padding:60px;
+border-radius:35px;
+text-align:center;
+color:white;
+}
+
+.contact-box h2{
+font-size:45px;
+margin-bottom:20px;
+}
+
+.contact-box p{
+max-width:700px;
+margin:auto;
+line-height:1.8;
+margin-bottom:35px;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px 8%;
+text-align:center;
+border-top:1px solid rgba(255,255,255,0.08);
+color:#90a4ae;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:45px;
+}
+
+.section-title h2{
+font-size:35px;
+}
+
+.contact-box h2{
+font-size:35px;
+}
+
+nav ul{
+display:none;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <!-- ========== HEADER / NAVIGATION ========== -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <img src="assets/images/logo/logo.png" alt="C Service Business">
-                <span>C Service <strong>Formation</strong></span>
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#formations">Nos formations</a></li>
-                    <li><a href="#pourquoi-nous">Pourquoi nous</a></li>
-                    <li><a href="#temoignages">Témoignages</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button class="menu-toggle" aria-label="Menu">☰</button>
-            </nav>
-        </div>
-    </header>
+<!-- NAVBAR -->
 
-    <!-- ========== SECTION HERO ========== -->
-    <section id="accueil" class="hero">
-        <div class="hero-bg" style="background-image: url('assets/images/hero/hero-bg.jpg');"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <span class="badge">🔥 +5000 apprenants</span>
-                <h1>Montez en compétences <br>avec nos <span class="highlight">formations expertes</span></h1>
-                <p>Accédez à +50 cours en ligne, coaching personnalisé et certificats reconnus.</p>
-                <div class="hero-buttons">
-                    <a href="#formations" class="btn btn-primary">📚 Voir les formations</a>
-                    <a href="#contact" class="btn btn-outline">🎓 Essai gratuit</a>
-                </div>
-                <div class="hero-stats">
-                    <div><span>50+</span><br>Cours</div>
-                    <div><span>200+</span><br>Heures de contenu</div>
-                    <div><span>98%</span><br>De satisfaction</div>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="assets/images/hero/hero-main.png" alt="Étudiant en formation en ligne">
-            </div>
-        </div>
-    </section>
+<nav>
 
-    <!-- ========== SECTION FORMATIONS ========== -->
-    <section id="formations" class="formations">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Nos cursus</span>
-                <h2>Des formations qui font la différence</h2>
-                <p>Programmes conçus par des experts du secteur, accessibles à vie</p>
-            </div>
-            <div class="formations-grid">
-                <div class="formation-card">
-                    <div class="formation-image">
-                        <img src="assets/images/services/web.jpg" alt="Développement Web">
-                        <span class="formation-level">Débutant à Expert</span>
-                    </div>
-                    <div class="formation-content">
-                        <h3>💻 Développement Web Full Stack</h3>
-                        <p>HTML/CSS, JavaScript, React, Node.js, MongoDB</p>
-                        <div class="formation-meta">
-                            <span>⏱️ 40h de cours</span>
-                            <span>🎓 Certifiant</span>
-                        </div>
-                        <div class="formation-price">
-                            <span class="old-price">499€</span>
-                            <span class="price">299€</span>
-                        </div>
-                        <a href="#contact" class="btn-small">Je m'inscris →</a>
-                    </div>
-                </div>
+<div class="logo">
+C-SERVICE <span>FORMATION</span>
+</div>
 
-                <div class="formation-card">
-                    <div class="formation-image">
-                        <img src="assets/images/services/video.jpg" alt="Marketing Digital">
-                        <span class="formation-level">Intermédiaire</span>
-                    </div>
-                    <div class="formation-content">
-                        <h3>📱 Marketing Digital 360</h3>
-                        <p>SEO, SEA, réseaux sociaux, emailing, analytics</p>
-                        <div class="formation-meta">
-                            <span>⏱️ 35h de cours</span>
-                            <span>🎓 Certifiant</span>
-                        </div>
-                        <div class="formation-price">
-                            <span class="old-price">399€</span>
-                            <span class="price">249€</span>
-                        </div>
-                        <a href="#contact" class="btn-small">Je m'inscris →</a>
-                    </div>
-                </div>
+<ul>
+<li><a href="#home">Accueil</a></li>
+<li><a href="#courses">Formations</a></li>
+<li><a href="#features">Fonctionnalités</a></li>
+<li><a href="#testimonials">Avis</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 
-                <div class="formation-card">
-                    <div class="formation-image">
-                        <img src="assets/images/services/logo-design.jpg" alt="Design Graphique">
-                        <span class="formation-level">Débutant</span>
-                    </div>
-                    <div class="formation-content">
-                        <h3>🎨 Design Graphique Créatif</h3>
-                        <p>Photoshop, Illustrator, Figma, UX/UI design</p>
-                        <div class="formation-meta">
-                            <span>⏱️ 30h de cours</span>
-                            <span>🎓 Certifiant</span>
-                        </div>
-                        <div class="formation-price">
-                            <span class="old-price">349€</span>
-                            <span class="price">199€</span>
-                        </div>
-                        <a href="#contact" class="btn-small">Je m'inscris →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</nav>
 
-    <!-- ========== POURQUOI NOUS ========== -->
-    <section id="pourquoi-nous" class="why-us">
-        <div class="container">
-            <div class="why-grid">
-                <div class="why-video">
-                    <img src="assets/images/portfolio/project1.png" alt="Aperçu formation">
-                </div>
-                <div class="why-content">
-                    <span class="section-tag">✅ Pourquoi nous choisir ?</span>
-                    <h2>La formation qui s'adapte à <span class="highlight">votre rythme</span></h2>
-                    <ul class="why-list">
-                        <li>🎯 <strong>Accès à vie</strong> - Revoir les cours à tout moment</li>
-                        <li>👨‍🏫 <strong>Support 7j/7</strong> - Profs disponibles pour vos questions</li>
-                        <li>📜 <strong>Certificats officiels</strong> - Valorisez votre CV</li>
-                        <li>💼 <strong>Projets concrets</strong> - Portfolio professionnel à la clé</li>
-                        <li>🔄 <strong>Mise à jour continue</strong> - Contenu toujours actuel</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">📖 Télécharger le programme</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
 
-    <!-- ========== TÉMOIGNAGES ========== -->
-    <section id="temoignages" class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Ils nous font confiance</span>
-                <h2>Ce que disent nos apprenants</h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"Grâce à cette formation, j'ai changé de carrière et obtenu mon premier poste de développeur !"</p>
-                    <div class="testimonial-author">
-                        <strong>Marie D.</strong>
-                        <span>Développeuse Front-end</span>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Les cours sont clairs, pratiques et les profs vraiment à l'écoute. Je recommande à 100%."</p>
-                    <div class="testimonial-author">
-                        <strong>Thomas L.</strong>
-                        <span>Chef de projet digital</span>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p>"La flexibilité des horaires m'a permis d'apprendre tout en travaillant. Un investissement rentable !"</p>
-                    <div class="testimonial-author">
-                        <strong>Sophie M.</strong>
-                        <span>Freelance</span>
-                        <div class="stars">★★★★★</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero" id="home">
 
-    <!-- ========== NEWSLETTER ========== -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h3>🎁 Recevez 3h de formation gratuite</h3>
-                <p>Inscrivez-vous à notre newsletter et obtenez un cours offert immédiatement</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Votre email professionnel" required>
-                    <button type="submit">Je m'inscris gratuitement</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<div class="hero-content">
 
-    <!-- ========== CONTACT ========== -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Une question ?</h2>
-                    <p>Notre équipe pédagogique vous répond sous 24h</p>
-                    <a href="https://wa.me/33000000000" class="whatsapp-btn">
-                        <img src="assets/images/ui/whatsapp.png" alt="WhatsApp">
-                        Chat WhatsApp
-                    </a>
-                    <p class="contact-phone">📞 01 23 45 67 89</p>
-                    <p class="contact-email">✉️ contact@cserviceformation.com</p>
-                </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Nom complet" required>
-                    <input type="email" placeholder="Email" required>
-                    <select>
-                        <option>Je souhaite m'inscrire à une formation</option>
-                        <option>Je veux plus d'informations</option>
-                        <option>Autre demande</option>
-                    </select>
-                    <textarea rows="4" placeholder="Votre message"></textarea>
-                    <button type="submit" class="btn btn-primary">Envoyer →</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<div class="badge">
+🚀 VERSION ULTRA BUSINESS
+</div>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="assets/images/logo/logo.png" alt="Logo" width="40">
-                    <p>C Service Formation - La formation en ligne qui vous propulse vers l'emploi.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Liens rapides</h4>
-                    <ul>
-                        <li><a href="#formations">Formations</a></li>
-                        <li><a href="#temoignages">Témoignages</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-legal">
-                    <h4>Légal</h4>
-                    <ul>
-                        <li><a href="#">CGU</a></li>
-                        <li><a href="#">Politique de confidentialité</a></li>
-                        <li><a href="#">Mentions légales</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 C Service Formation - Tous droits réservés</p>
-            </div>
-        </div>
-    </footer>
+<h1>
+Deviens un <span>Expert Digital</span> avec C-SERVICE FORMATION
+</h1>
 
-    <script src="script.js"></script>
+<p>
+Apprends le développement web, le montage vidéo, le design, l’intelligence artificielle et le business digital avec une plateforme moderne professionnelle.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#" class="btn btn-primary">
+COMMENCER MAINTENANT
+</a>
+
+<a href="#" class="btn btn-outline">
+ESSAI GRATUIT
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="stat-box">
+<h2>10K+</h2>
+<p>Étudiants actifs</p>
+</div>
+
+<div class="stat-box">
+<h2>120+</h2>
+<p>Formations premium</p>
+</div>
+
+<div class="stat-box">
+<h2>98%</h2>
+<p>Taux de satisfaction</p>
+</div>
+
+<div class="stat-box">
+<h2>24/7</h2>
+<p>Support professionnel</p>
+</div>
+
+</section>
+
+<!-- COURSES -->
+
+<section id="courses">
+
+<div class="section-title">
+<h2>Nos Formations Premium</h2>
+<p>
+Des formations modernes conçues pour le business, la technologie et la réussite digitale.
+</p>
+</div>
+
+<div class="courses">
+
+<div class="course-card">
+
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200">
+
+<div class="course-content">
+
+<h3>Développement Web PRO</h3>
+
+<p>
+HTML, CSS, JavaScript, GitHub, Responsive Design et création de plateformes modernes.
+</p>
+
+<div class="price">
+49$
+</div>
+
+<a href="#" class="btn btn-primary">
+S'inscrire
+</a>
+
+</div>
+
+</div>
+
+<div class="course-card">
+
+<img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200">
+
+<div class="course-content">
+
+<h3>Montage Vidéo Expert</h3>
+
+<p>
+CapCut, Premiere Pro, TikTok Reels, transitions cinématiques et branding professionnel.
+</p>
+
+<div class="price">
+39$
+</div>
+
+<a href="#" class="btn btn-primary">
+S'inscrire
+</a>
+
+</div>
+
+</div>
+
+<div class="course-card">
+
+<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200">
+
+<div class="course-content">
+
+<h3>Intelligence Artificielle</h3>
+
+<p>
+Maîtrise ChatGPT, IA Business, automatisation et création de contenus intelligents.
+</p>
+
+<div class="price">
+59$
+</div>
+
+<a href="#" class="btn btn-primary">
+S'inscrire
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section id="features">
+
+<div class="section-title">
+<h2>Fonctionnalités ULTRA BUSINESS</h2>
+
+<p>
+Une plateforme premium pensée pour une expérience moderne et professionnelle.
+</p>
+
+</div>
+
+<div class="features">
+
+<div class="feature-box">
+<h3>🔐 Connexion Étudiant</h3>
+<p>
+Création de compte, dashboard personnel, progression et historique des formations.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>💳 Paiements Intégrés</h3>
+<p>
+Orange Money, M-Pesa, PayPal, Stripe et cartes bancaires.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>📜 Certificats PDF</h3>
+<p>
+Génération automatique de certificats professionnels après validation.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>📱 Version Android</h3>
+<p>
+Transformation du site en application Android professionnelle Play Store.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>🤖 Assistant IA</h3>
+<p>
+Support intelligent disponible 24h/24 pour aider les étudiants.
+</p>
+</div>
+
+<div class="feature-box">
+<h3>☁️ Firebase Cloud</h3>
+<p>
+Base de données temps réel ultra rapide et sécurisée.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section id="testimonials">
+
+<div class="section-title">
+
+<h2>Ils nous font confiance</h2>
+
+<p>
+Des étudiants satisfaits qui évoluent grâce à C-SERVICE FORMATION.
+</p>
+
+</div>
+
+<div class="testimonials">
+
+<div class="testimonial">
+<p>
+“Grâce à cette plateforme, j’ai appris à créer des sites professionnels et trouvé mes premiers clients.”
+</p>
+<h4>— Jonathan M.</h4>
+</div>
+
+<div class="testimonial">
+<p>
+“Les formations sont modernes, motivantes et faciles à suivre même sur téléphone.”
+</p>
+<h4>— Grâce K.</h4>
+</div>
+
+<div class="testimonial">
+<p>
+“Le meilleur centre de formation digital que j’ai utilisé jusqu’à aujourd’hui.”
+</p>
+<h4>— Patrick L.</h4>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="contact-box">
+
+<h2>
+🔥 Rejoins C-SERVICE FORMATION
+</h2>
+
+<p>
+Commence aujourd’hui et développe des compétences digitales puissantes pour ton futur.
+</p>
+
+<a href="https://wa.me/243848681325" class="btn btn-outline">
+WhatsApp : 0848681325
+</a>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+© 2026 C-SERVICE FORMATION — VERSION ULTRA BUSINESS <br><br>
+
+Instagram : @cianney_officiel <br>
+Branding : parole_fortifiante
+
+</p>
+
+</footer>
+
 </body>
 </html>
