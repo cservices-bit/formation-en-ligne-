@@ -1,0 +1,98 @@
+# ========== CONFIGURATION GÉNÉRALE ==========
+title: C Service Formation
+description: Plateforme de formation en ligne proposant des cursus web, marketing et design. Accès à vie, certificats officiels, support 7j/7.
+url: https://ton-pseudo.github.io
+baseurl: /c-service-business
+
+# ========== THÈME ==========
+theme: jekyll-theme-minimal
+
+# ========== MÉTADONNÉES ==========
+author: C Service Business
+email: contact@cserviceformation.com
+locale: fr_FR
+
+# ========== LOGO & ICÔNES ==========
+logo: /assets/images/logo/logo.png
+favicon: /assets/images/logo/logo.png
+
+# ========== RÉSEAUX SOCIAUX ==========
+social:
+  name: C Service Formation
+  links:
+    - https://wa.me/33000000000
+    - https://github.com/ton-pseudo/c-service-business
+
+# ========== NAVIGATION ==========
+navigation:
+  - title: Accueil
+    url: /
+  - title: Formations
+    url: /#formations
+  - title: Pourquoi nous
+    url: /#pourquoi-nous
+  - title: Témoignages
+    url: /#temoignages
+  - title: Contact
+    url: /#contact
+
+# ========== SEO ==========
+keywords:
+  - formation en ligne
+  - cours web
+  - marketing digital
+  - design graphique
+  - certification
+  - e-learning
+
+# ========== RÉGLAGES JEKYLL ==========
+markdown: kramdown
+highlighter: rouge
+lsi: false
+safe: true
+incremental: false
+
+# ========== EXCLUSIONS ==========
+exclude:
+  - README.md
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+
+# ========== INCLUSIONS ==========
+include:
+  - assets/images/
+
+# ========== PLUGINS ==========
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ========== PÉRIMALIENS ==========
+permalink: pretty
+
+# ========== PARAMÈTRES PERSONNALISÉS ==========
+contact:
+  whatsapp: 01 23 45 67 89
+  phone: +330123456789
+  email: contact@cserviceformation.com
+
+formations:
+  - title: Développement Web Full Stack
+    price: 299
+    old_price: 499
+    duration: 40h
+    level: débutant
+  - title: Marketing Digital 360
+    price: 249
+    old_price: 399
+    duration: 35h
+    level: intermédiaire
+  - title: Design Graphique Créatif
+    price: 199
+    old_price: 349
+    duration: 30h
+    level: débutant
