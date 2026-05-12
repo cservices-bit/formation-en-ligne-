@@ -678,76 +678,99 @@ WhatsApp : 0850406200
 </div>
 
 </section>
+<!-- LOGIN SECTION PRO -->
 
-<section class="login-box">
+<section class="login-box" id="login">
 
+<div class="section-title">
 <h2>Connexion Étudiant</h2>
+<p>Accède à ton espace personnel sécurisé</p>
+</div>
 
-<input type="email" id="email" placeholder="Votre email">
+<div style="max-width:500px;margin:auto;text-align:center;">
 
-<input type="password" id="password" placeholder="Mot de passe">
+<input type="email" id="email" placeholder="Votre email"
+style="width:100%;padding:15px;margin:10px 0;border-radius:10px;border:none;">
 
-<button onclick="register()">
+<input type="password" id="password" placeholder="Mot de passe"
+style="width:100%;padding:15px;margin:10px 0;border-radius:10px;border:none;">
+
+<button onclick="register()" class="btn btn-primary" style="width:100%;margin-top:10px;">
 Créer un compte
 </button>
 
-<button onclick="login()">
+<button onclick="login()" class="btn btn-outline" style="width:100%;margin-top:10px;">
 Connexion
 </button>
 
+</div>
+
 </section>
+<!-- DASHBOARD ÉTUDIANT -->
+
+<section id="dashboard" style="display:none;padding:100px 8%;">
+
+<div class="section-title">
+<h2>🎓 Mon Dashboard</h2>
+<p>Bienvenue dans ton espace étudiant sécurisé</p>
+</div>
+
+<div style="max-width:700px;margin:auto;background:rgba(255,255,255,0.05);
+padding:40px;border-radius:25px;text-align:center;border:1px solid rgba(255,255,255,0.1);">
+
+<h3 id="userEmail" style="color:#00e5ff;margin-bottom:20px;"></h3>
+
+<p style="color:#cfd8dc;margin-bottom:30px;">
+Tu es connecté à la plateforme C-SERVICE FORMATION ULTRA BUSINESS.
+</p>
+
+<button onclick="logout()" class="btn btn-primary">
+Se déconnecter
+</button>
+
+</div>
+
+</section>
+<footer>
+
+<p>
+© 2026 C-SERVICE FORMATION — VERSION ULTRA BUSINESS
+</p>
+
+</footer>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-
 import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
-}
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 const firebaseConfig = {
-
-apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
-
+apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HO9x9Nb0",
 authDomain: "c-service-formation.firebaseapp.com",
-
 projectId: "c-service-formation",
-
-storageBucket: "c-service-formation.firebasestorage.app",
-
+storageBucket: "c-service-formation.appspot.com",
 messagingSenderId: "202572534133",
-
-appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
-
-measurementId: "G-JZY71YGMLK"
-
+appId: "1:202572534133:web:0cd8d52f359cf205b3033c"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
 
 window.register = function(){
 
 const email = document.getElementById("email").value;
-
 const password = document.getElementById("password").value;
 
 createUserWithEmailAndPassword(auth,email,password)
-
 .then(() => {
-
-alert("Compte créé avec succès");
-
+alert("Compte créé avec succès 🚀");
 })
-
 .catch((error)=>{
-
 alert(error.message);
-
 });
 
 }
@@ -755,26 +778,48 @@ alert(error.message);
 window.login = function(){
 
 const email = document.getElementById("email").value;
-
 const password = document.getElementById("password").value;
 
 signInWithEmailAndPassword(auth,email,password)
-
 .then(() => {
-
-alert("Connexion réussie");
-
+alert("Connexion réussie 🔥");
 })
-
 .catch((error)=>{
-
 alert(error.message);
-
 });
 
 }
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
+// Vérification connexion utilisateur
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+
+        // cacher login
+        document.querySelector(".login-box").style.display = "none";
+
+        // afficher dashboard
+        document.getElementById("dashboard").style.display = "block";
+
+        // afficher email
+        document.getElementById("userEmail").innerText = user.email;
+
+    } else {
+
+        // retour login
+        document.querySelector(".login-box").style.display = "block";
+        document.getElementById("dashboard").style.display = "none";
+    }
+});
+
+// logout
+window.logout = function() {
+    signOut(auth).then(() => {
+        alert("Déconnecté");
+    });
+};
 </script>
+  
   <!-- FOOTER -->
 
 <footer>
