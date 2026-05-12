@@ -1190,48 +1190,287 @@ Envoyer
 
 </section>
 
-<!-- ========================= -->
-<!-- FIREBASE ADMIN SCRIPT -->
-<!-- ========================= -->
+<!-- FIREBASE ULTRA BUSINESS PRO -->
+<script type="module">
 
-<script>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-async function loadUsers(){
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-const table = document.getElementById("users-table");
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-table.innerHTML = `
-<tr>
-<td style="padding:15px;">admin@cservice.com</td>
-<td style="padding:15px;">2026</td>
-<td style="padding:15px;color:lime;">ACTIVE</td>
-</tr>
 
-<tr>
-<td style="padding:15px;">client@gmail.com</td>
-<td style="padding:15px;">2026</td>
-<td style="padding:15px;color:orange;">PREMIUM</td>
-</tr>
+// ================= FIREBASE CONFIG =================
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
+
+authDomain: "c-service-formation.firebaseapp.com",
+
+projectId: "c-service-formation",
+
+storageBucket: "c-service-formation.firebasestorage.app",
+
+messagingSenderId: "202572534133",
+
+appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
+
+measurementId: "G-JZY71YGMLK"
+
+};
+
+
+// ================= INITIALISATION =================
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+// ================= COURSES =================
+
+let courses = [
+
+{
+id:1,
+name:"Développement Web PRO",
+progress:20
+},
+
+{
+id:2,
+name:"Montage Vidéo Expert",
+progress:45
+},
+
+{
+id:3,
+name:"Intelligence Artificielle",
+progress:10
+}
+
+];
+
+
+// ================= REGISTER =================
+
+window.register = async function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+try{
+
+await createUserWithEmailAndPassword(auth,email,password);
+
+alert("Compte créé avec succès 🚀");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+
+// ================= LOGIN =================
+
+window.login = async function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+alert("Connexion réussie 🔥");
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+
+// ================= LOGOUT =================
+
+window.logout = async function(){
+
+await signOut(auth);
+
+alert("Déconnecté");
+
+}
+
+
+// ================= SAVE DATA =================
+
+async function saveProgress(user){
+
+await setDoc(doc(db,"users",user.uid),{
+
+email:user.email,
+
+courses:courses
+
+});
+
+}
+
+
+// ================= LOAD DATA =================
+
+async function loadUserData(user){
+
+const ref = doc(db,"users",user.uid);
+
+const snap = await getDoc(ref);
+
+if(snap.exists()){
+
+courses = snap.data().courses;
+
+}
+
+}
+
+
+// ================= LOAD COURSES =================
+
+function loadCourses(){
+
+const container = document.getElementById("coursesContainer");
+
+container.innerHTML = "";
+
+let total = 0;
+
+courses.forEach(course => {
+
+total += course.progress;
+
+container.innerHTML += `
+
+<div style="
+background:rgba(255,255,255,0.05);
+padding:20px;
+margin-bottom:20px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.1);
+">
+
+<h3>📘 ${course.name}</h3>
+
+<div style="
+background:#111;
+height:10px;
+border-radius:20px;
+overflow:hidden;
+margin:15px 0;
+">
+
+<div style="
+width:${course.progress}%;
+height:10px;
+background:#00e5ff;
+border-radius:20px;
+"></div>
+
+</div>
+
+<p>
+Progression : ${course.progress}%
+</p>
+
+</div>
+
 `;
 
-document.getElementById("users-count").innerText = "2 utilisateurs";
+});
+
+const global =
+Math.round(total / courses.length);
+
+document.getElementById("globalProgress").innerText =
+global + "%";
 
 }
 
-function uploadVideo(){
 
-alert("Système Upload Vidéo PRO MAX activé 🎬");
+// ================= AUTH STATE =================
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(user){
+
+document.querySelector(".login-box").style.display = "none";
+
+document.getElementById("dashboard").style.display = "block";
+
+document.getElementById("userEmail").innerText =
+"📧 " + user.email;
+
+await loadUserData(user);
+
+loadCourses();
+
+}else{
+
+document.querySelector(".login-box").style.display = "block";
+
+document.getElementById("dashboard").style.display = "none";
 
 }
 
-function sendNotif(){
+});
 
-alert("Notification envoyée à tous les utilisateurs 🔥");
-
-}
+console.log("Firebase connecté 🔥");
 
 </script>
-</body>
-</html>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+
+© 2026 C-SERVICE FORMATION — VERSION ULTRA BUSINESS
+
+<br><br>
+
+Instagram : @dev_full_stack_officiel
+
+<br>
+
+Branding : le silence & développement
+
+</p>
+
+</footer>
+
 </body>
 </html>
