@@ -801,8 +801,31 @@ alert(error.message);
 });
 
 }
-import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+onAuthStateChanged(auth, async (user) => {
 
+    if (user) {
+
+        document.querySelector(".login-box").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+        document.getElementById("userEmail").innerText = "📧 " + user.email;
+
+        // 🔥 charger données Firebase
+        let data = await loadUserData(user);
+
+        if (data) {
+            courses = data; // restaurer progression
+        }
+
+        loadCourses();
+
+    } else {
+
+        document.querySelector(".login-box").style.display = "block";
+        document.getElementById("dashboard").style.display = "none";
+    }
+
+});
 // Vérification connexion utilisateur
 onAuthStateChanged(auth, (user) => {
 
@@ -898,6 +921,44 @@ function loadCourses() {
     window.onload = () => {
     document.getElementById("dashboard").style.display = "none";
 };
+    async function saveProgress(user, courses) {
+
+    await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        courses: courses
+    });
+
+}
+    async function loadUserData(user) {
+
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+        return snap.data().courses;
+    } else {
+        return null;
+    }
+
+}
+    async function updateProgress(courseId, value) {
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    courses = courses.map(c => {
+        if (c.id === courseId) {
+            c.progress = value;
+        }
+        return c;
+    });
+
+    loadCourses();
+
+    // 🔥 sauvegarde Firebase
+    await saveProgress(user, courses);
+}
 </script>
   
   <!-- FOOTER -->
