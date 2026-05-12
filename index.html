@@ -702,9 +702,31 @@ Créer un compte
 <button onclick="login()" class="btn btn-outline" style="width:100%;margin-top:10px;">
 Connexion
 </button>
-
+    
+<button onclick="loginUser()">
+Connexion Premium
+</button>
 </div>
+    <button onclick="registerUser()">
+Créer un compte
+</button>
 
+<script>
+function registerUser(){
+
+const email = prompt("Votre Email");
+const password = prompt("Mot de passe");
+
+auth.createUserWithEmailAndPassword(email,password)
+.then(()=>{
+alert("Compte créé avec succès 🔥");
+})
+.catch((error)=>{
+alert(error.message);
+});
+
+}
+</script>
 </section>
 <!-- DASHBOARD ÉTUDIANT PRO MAX -->
 
@@ -1042,5 +1064,174 @@ Branding : le silence & développement
 </p>
 
 </footer>
+      <!-- TON SITE -->
+
+<h1>C-SERVICE FORMATION</h1>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
+  authDomain: "c-service-formation.firebaseapp.com",
+  projectId: "c-service-formation",
+  storageBucket: "c-service-formation.firebasestorage.app",
+  messagingSenderId: "202572534133",
+  appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
+  measurementId: "G-JZY71YGMLK"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+console.log("Firebase connecté 🔥");
+    <script>
+function loginUser(){
+
+const email = prompt("Votre Email");
+const password = prompt("Mot de passe");
+
+auth.signInWithEmailAndPassword(email,password)
+.then(() => {
+alert("Bienvenue sur C-SERVICE FORMATION 🔥");
+})
+.catch((error)=>{
+alert(error.message);
+});
+
+}
+</script>
+</script>
+<!-- ========================= -->
+<!-- C-SERVICE ADMIN PANEL PRO -->
+<!-- ========================= -->
+
+<section id="admin-panel" style="padding:40px;background:#0f172a;color:white;font-family:Poppins,sans-serif;">
+
+<h1 style="font-size:35px;text-align:center;margin-bottom:30px;">
+⚡ C-SERVICE ADMIN PANEL PRO
+</h1>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+
+<!-- CARD -->
+<div style="background:#1e293b;padding:25px;border-radius:20px;">
+<h2>👥 Utilisateurs</h2>
+<p id="users-count">0 utilisateurs</p>
+<button onclick="loadUsers()" style="padding:10px 20px;border:none;border-radius:10px;background:#2563eb;color:white;">
+Voir
+</button>
+</div>
+
+<!-- CARD -->
+<div style="background:#1e293b;padding:25px;border-radius:20px;">
+<h2>🎬 Vidéos</h2>
+<p>Gestion des vidéos premium</p>
+<button onclick="uploadVideo()" style="padding:10px 20px;border:none;border-radius:10px;background:#16a34a;color:white;">
+Upload
+</button>
+</div>
+
+<!-- CARD -->
+<div style="background:#1e293b;padding:25px;border-radius:20px;">
+<h2>💰 Revenus</h2>
+<p id="revenu">0 $</p>
+<button style="padding:10px 20px;border:none;border-radius:10px;background:#f59e0b;color:white;">
+Analytics
+</button>
+</div>
+
+<!-- CARD -->
+<div style="background:#1e293b;padding:25px;border-radius:20px;">
+<h2>📢 Notifications</h2>
+<p>Envoyer message à tous</p>
+<button onclick="sendNotif()" style="padding:10px 20px;border:none;border-radius:10px;background:#dc2626;color:white;">
+Envoyer
+</button>
+</div>
+
+</div>
+
+<br><br>
+
+<!-- TABLE USERS -->
+<div style="background:#1e293b;padding:20px;border-radius:20px;overflow:auto;">
+
+<h2>📋 Liste des utilisateurs</h2>
+
+<table style="width:100%;border-collapse:collapse;color:white;">
+<thead>
+<tr style="background:#334155;">
+<th style="padding:15px;">Email</th>
+<th style="padding:15px;">Date</th>
+<th style="padding:15px;">Statut</th>
+</tr>
+</thead>
+
+<tbody id="users-table">
+
+<tr>
+<td style="padding:15px;">Aucun utilisateur</td>
+<td style="padding:15px;">--</td>
+<td style="padding:15px;">--</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FIREBASE ADMIN SCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+async function loadUsers(){
+
+const table = document.getElementById("users-table");
+
+table.innerHTML = `
+<tr>
+<td style="padding:15px;">admin@cservice.com</td>
+<td style="padding:15px;">2026</td>
+<td style="padding:15px;color:lime;">ACTIVE</td>
+</tr>
+
+<tr>
+<td style="padding:15px;">client@gmail.com</td>
+<td style="padding:15px;">2026</td>
+<td style="padding:15px;color:orange;">PREMIUM</td>
+</tr>
+`;
+
+document.getElementById("users-count").innerText = "2 utilisateurs";
+
+}
+
+function uploadVideo(){
+
+alert("Système Upload Vidéo PRO MAX activé 🎬");
+
+}
+
+function sendNotif(){
+
+alert("Notification envoyée à tous les utilisateurs 🔥");
+
+}
+
+</script>
+</body>
+</html>
 </body>
 </html>
