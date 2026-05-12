@@ -710,35 +710,32 @@ Connexion
 </button>
 
 </section>
-  <script type="module">
+<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
-
 getAuth,
-
 createUserWithEmailAndPassword,
-
 signInWithEmailAndPassword
-
 }
-
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 const firebaseConfig = {
 
-apiKey: "TON_API_KEY",
+apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
 
-authDomain: "TON_PROJET.firebaseapp.com",
+authDomain: "c-service-formation.firebaseapp.com",
 
-projectId: "TON_PROJET",
+projectId: "c-service-formation",
 
-storageBucket: "TON_PROJET.appspot.com",
+storageBucket: "c-service-formation.firebasestorage.app",
 
-messagingSenderId: "XXXX",
+messagingSenderId: "202572534133",
 
-appId: "XXXX"
+appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
+
+measurementId: "G-JZY71YGMLK"
 
 };
 
@@ -756,7 +753,7 @@ createUserWithEmailAndPassword(auth,email,password)
 
 .then(() => {
 
-alert("Compte créé");
+alert("Compte créé avec succès");
 
 })
 
