@@ -715,5 +715,103 @@ Branding : parole_fortifiante
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 </script>
+  <section class="login-box">
+
+<h2>Connexion Étudiant</h2>
+
+<input type="email" id="email" placeholder="Votre email">
+
+<input type="password" id="password" placeholder="Mot de passe">
+
+<button onclick="register()">
+Créer un compte
+</button>
+
+<button onclick="login()">
+Connexion
+</button>
+
+</section>
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+
+getAuth,
+
+createUserWithEmailAndPassword,
+
+signInWithEmailAndPassword
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "TON_API_KEY",
+
+authDomain: "TON_PROJET.firebaseapp.com",
+
+projectId: "TON_PROJET",
+
+storageBucket: "TON_PROJET.appspot.com",
+
+messagingSenderId: "XXXX",
+
+appId: "XXXX"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+window.register = function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then(() => {
+
+alert("Compte créé");
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+
+window.login = function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(() => {
+
+alert("Connexion réussie");
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+
+</script>
 </body>
 </html>
