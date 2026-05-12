@@ -844,122 +844,190 @@ onAuthStateChanged(auth, (user) => {
         loadCourses();
 
     } else {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-        // 🔓 afficher login
-        document.querySelector(".login-box").style.display = "block";
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-        // 🚫 cacher dashboard
-        document.getElementById("dashboard").style.display = "none";
-    }
-
-});
-
-        // cacher login
-        document.querySelector(".login-box").style.display = "none";
-
-        // afficher dashboard
-        document.getElementById("dashboard").style.display = "block";
-
-        // afficher email
-        document.getElementById("userEmail").innerText = user.email;
-
-    } else {
-
-        // retour login
-        document.querySelector(".login-box").style.display = "block";
-        document.getElementById("dashboard").style.display = "none";
-    }
-});
-
-// logout
-window.logout = function() {
-    signOut(auth).then(() => {
-        alert("Déconnecté");
-    });
+// 🔥 CONFIG
+const firebaseConfig = {
+apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HO9x9Nb0",
+authDomain: "c-service-formation.firebaseapp.com",
+projectId: "c-service-formation",
+storageBucket: "c-service-formation.appspot.com",
+messagingSenderId: "202572534133",
+appId: "1:202572534133:web:0cd8d52f359cf205b3033c"
 };
-    const courses = [
-    { id: 1, name: "Développement Web PRO", progress: 20 },
-    { id: 2, name: "Montage Vidéo Expert", progress: 50 },
-    { id: 3, name: "Intelligence Artificielle", progress: 10 }
+
+// ✅ INIT APP (IMPORTANT ORDRE)
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// 📚 COURSES
+let courses = [
+{ id: 1, name: "Développement Web PRO", progress: 20 },
+{ id: 2, name: "Montage Vidéo Expert", progress: 50 },
+{ id: 3, name: "Intelligence Artificielle", progress: 10 }
 ];
 
-// afficher cours
+
+// ===================== AUTH =====================
+
+// REGISTER
+window.register = function () {
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+createUserWithEmailAndPassword(auth, email, password)
+.then(() => {
+alert("Compte créé 🚀");
+})
+.catch((e) => alert(e.message));
+
+};
+
+// LOGIN
+window.login = function () {
+
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+signInWithEmailAndPassword(auth, email, password)
+.then(() => {
+alert("Connexion OK 🔥");
+})
+.catch((e) => alert(e.message));
+
+};
+
+
+// ===================== SAVE / LOAD =====================
+
+async function saveProgress(user) {
+await setDoc(doc(db, "users", user.uid), {
+email: user.email,
+courses: courses
+});
+}
+
+async function loadUserData(user) {
+const ref = doc(db, "users", user.uid);
+const snap = await getDoc(ref);
+
+if (snap.exists()) {
+courses = snap.data().courses;
+}
+}
+
+
+// ===================== DASHBOARD =====================
+
 function loadCourses() {
 
-    let container = document.getElementById("coursesContainer");
-    container.innerHTML = "";
+let container = document.getElementById("coursesContainer");
+container.innerHTML = "";
 
-    let total = 0;
+let total = 0;
 
-    courses.forEach(course => {
+courses.forEach(course => {
 
-        total += course.progress;
+total += course.progress;
 
-        container.innerHTML += `
-        <div style="background:rgba(255,255,255,0.03);
-        padding:20px;margin-bottom:15px;border-radius:15px;
-        border:1px solid rgba(255,255,255,0.08);">
+container.innerHTML += `
+<div style="background:rgba(255,255,255,0.03);
+padding:20px;margin-bottom:15px;border-radius:15px;
+border:1px solid rgba(255,255,255,0.08);">
 
-            <h3 style="margin-bottom:10px;">📘 ${course.name}</h3>
+<h3>📘 ${course.name}</h3>
 
-            <div style="background:#111;border-radius:20px;height:10px;">
-                <div style="width:${course.progress}%;
-                height:10px;background:#00e5ff;border-radius:20px;"></div>
-            </div>
+<div style="background:#111;height:10px;border-radius:20px;">
+<div style="width:${course.progress}%;
+height:10px;background:#00e5ff;border-radius:20px;"></div>
+</div>
 
-            <p style="margin-top:10px;color:#cfd8dc;">
-                Progression : ${course.progress}%
-            </p>
+<p>Progression : ${course.progress}%</p>
 
-        </div>
-        `;
-    });
+</div>
+`;
+});
 
-    let global = Math.round(total / courses.length);
-    document.getElementById("globalProgress").innerText = global + "%";
+document.getElementById("globalProgress").innerText =
+Math.round(total / courses.length) + "%";
+
 }
-    window.onload = () => {
-    document.getElementById("dashboard").style.display = "none";
+
+
+// ===================== AUTH STATE =====================
+
+onAuthStateChanged(auth, async (user) => {
+
+if (user) {
+
+document.querySelector(".login-box").style.display = "none";
+document.getElementById("dashboard").style.display = "block";
+
+document.getElementById("userEmail").innerText = user.email;
+
+// load data Firebase
+await loadUserData(user);
+
+loadCourses();
+
+} else {
+
+document.querySelector(".login-box").style.display = "block";
+document.getElementById("dashboard").style.display = "none";
+
+}
+
+});
+
+
+// ===================== LOGOUT =====================
+
+window.logout = function () {
+
+signOut(auth).then(() => {
+alert("Déconnecté");
+});
+
 };
-    async function saveProgress(user, courses) {
 
-    await setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        courses: courses
-    });
 
-}
-    async function loadUserData(user) {
+// ===================== PROGRESSION =====================
 
-    const ref = doc(db, "users", user.uid);
-    const snap = await getDoc(ref);
+window.updateProgress = async function (id, value) {
 
-    if (snap.exists()) {
-        return snap.data().courses;
-    } else {
-        return null;
-    }
+courses = courses.map(c => {
+if (c.id === id) c.progress = value;
+return c;
+});
 
-}
-    async function updateProgress(courseId, value) {
+loadCourses();
 
-    const user = auth.currentUser;
+const user = auth.currentUser;
+if (user) await saveProgress(user);
 
-    if (!user) return;
+};
 
-    courses = courses.map(c => {
-        if (c.id === courseId) {
-            c.progress = value;
-        }
-        return c;
-    });
 
-    loadCourses();
-
-    // 🔥 sauvegarde Firebase
-    await saveProgress(user, courses);
-}
-</script>
+// hide dashboard start
+window.onload = () => {
+document.getElementById("dashboard").style.display = "none";
+};
   
   <!-- FOOTER -->
 
