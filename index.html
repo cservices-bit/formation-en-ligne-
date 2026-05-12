@@ -693,27 +693,82 @@ Branding : parole_fortifiante
 
 </footer>
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
-    authDomain: "c-service-formation.firebaseapp.com",
-    projectId: "c-service-formation",
-    storageBucket: "c-service-formation.firebasestorage.app",
-    messagingSenderId: "202572534133",
-    appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
-    measurementId: "G-JZY71YGMLK"
-  };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDBCRfdPaNXAaNQPmndD0I2ECJ4HOx9Nb0",
+
+authDomain: "c-service-formation.firebaseapp.com",
+
+projectId: "c-service-formation",
+
+storageBucket: "c-service-formation.firebasestorage.app",
+
+messagingSenderId: "202572534133",
+
+appId: "1:202572534133:web:0cd8d52f359cf205b3033c",
+
+measurementId: "G-JZY71YGMLK"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+window.register = function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then(() => {
+
+alert("Compte créé avec succès");
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+
+window.login = function(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then(() => {
+
+alert("Connexion réussie");
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+
 </script>
   <section class="login-box">
 
